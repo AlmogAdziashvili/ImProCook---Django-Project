@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block body %}
+{% load static %}
+<div class="container bg-white">
+    <div class="row">
+        <div class="col-md-3 col-mid">
+            <img class="profile-img" src="{{user_.profile_pic.url}}">
+        </div>
+        <div class="col-md-6 col-mid">
+            <h3>{{user_.first_name}} {{user_.last_name}}</h3>
+            <h4>{{user_.title}}</h4>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2 col-mid">
+            {% if profile_stat_ == 0 %}
+                <form action="#" method="get">
+                    {% csrf_token %}
+                    <input type="submit" class="btn-outline-vermillion" value="Follow" name="follow">
+                </form>
+            {% elif profile_stat_ == 1 %}
+                <form action="#" method="get">
+                    {% csrf_token %}
+                    <input type="submit" class="btn-vermillion" value="UnFollow" name="unfollow">
+                </form>
+            {% endif %}
+            <div class="row">
+                <div class="col-xl-6 col-mid div-follow"><a href="/followers/{{user_.pk}}" class="link-nodec foll">{{followers_count_}}<br>Followers</a></div>
+            <div class="col-xl-6 col-mid div-follow"><a href="/following/{{user_.pk}}" class="link-nodec foll">{{following_count_}}<br>Following</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="row profile-recipes-div"></div>
+    <center><h2>Recipes by {% if user.id == user_.id %} You {% else %} {{user_.first_name}} {% endif%}</h2></center>
+    <div class="row profile-recipes-div"></div>
+    {% for recipe_ in recipes %}
+        <a class="link-nodec" href="/recipes/{{ recipe_.pk }}">
+        <div class="post-secondary" style="background-image: url({{recipe_.recipe_pic.url}});">
+            <h6>{{recipe_.title}}</h6>
+        </div></a>
+    {% endfor %}
+</div>
+{% endblock %}

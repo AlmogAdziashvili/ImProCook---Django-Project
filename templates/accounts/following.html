@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container bg-white">
+    <center><div class="row"><div class="col-md-1 col-mid"><h1>Following</h1></div></div></center>
+    <br>
+    {% for usr in list_ %}
+    <a href="/profile/{{usr.pk}}" class="link-nodec foll">
+        <div class="row">
+            <div class="col-lg-1 col-mid"><img src="{{usr.profile_pic.url}}" class="follow-img"></div>
+            <div class="col-lg-2 col-mid col-fol">{{ usr.first_name }} {{ usr.last_name }}<br><span class="color-vermillion">{{ usr.title }}</span></div>
+        </div>
+    </a>
+    <hr>
+    {% endfor %}
+</div>
+{% endblock %}
