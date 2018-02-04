@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="post-o"><a class="new-recipe-link" href="/share/">Share a Recipe</a></div>
+    {% for p_ in posts %}
+        {% if p_.0 == 'mr' %}
+            <div class="post">
+                <h5 class="datetime">{{ p_.5 }}</h5>
+                <img class="post-img" src="{{ p_.1 }}">
+                <h5><span class="color-vermillion">You</span> shared a New Recipe</h5>
+                <a class="link-nodec" href="/recipes/{{ p_.2 }}">
+                <div class="post-secondary" style="background-image: url({{ p_.3 }});">
+                    <h6>{{ p_.4 }}</h6>
+                </div></a>
+            </div>
+        {% elif p_.0 == 'r' %}
+                <div class="post">
+                    <h5 class="datetime">{{ p_.7 }}</h5>
+                    <img class="post-img" src="{{ p_.1 }}">
+                        <h5><a class="link-nodec" href="/profile/{{ p_.6 }}"><span class="color-vermillion">{{ p_.5 }}</span></a> shared a New Recipe</h5>
+                    <a class="link-nodec" href="/recipes/{{ p_.2 }}">
+                    <div class="post-secondary" style="background-image: url({{ p_.3 }});">
+                        <h6>{{ p_.4 }}</h6>
+                    </div></a>
+                </div>
+        {% elif p_.0 == 'mf' %}
+                <div class="post">
+                    <h5 class="datetime">{{ p_.4 }}</h5>
+                    <img class="post-img" src="{{ p_.1 }}">
+                        <h5><span class="color-vermillion">You</span> started following <a class="link-nodec" href="/profile/{{ p_.3 }}"><span class="color-vermillion">{{ p_.2 }}</span></a></h5>
+                </div>
+        {% elif p_.0 == 'f' %}
+                <div class="post">
+                    <h5 class="datetime">{{ p_.4 }}</h5>
+                    <img class="post-img" src="{{ p_.1 }}">
+                        <h5><a class="link-nodec" href="/profile/{{ p_.3 }}"><span class="color-vermillion">{{ p_.2 }}</span></a> started following <span class="color-vermillion">You</span></h5>
+                </div>
+        {% elif p_.0 == 'ml' %}
+            <div class="post">
+                <h5 class="datetime">{{ p_.1 }}</h5>
+                <img class="post-img" src="{{ p_.2 }}">
+                <h5><span class="color-vermillion">You</span> liked a Recipe</h5>
+                <a class="link-nodec" href="/recipes/{{ p_.3 }}">
+                <div class="post-secondary" style="background-image: url({{ p_.4 }});">
+                    <h6>{{ p_.5 }}</h6>
+                </div></a>
+            </div>
+        {% elif p_.0 == 'l' %}
+                <div class="post">
+                    <h5 class="datetime">{{ p_.1 }}</h5>
+                    <img class="post-img" src="{{ p_.2 }}">
+                        <h5><a class="link-nodec" href="/profile/{{ p_.3 }}"><span class="color-vermillion">{{ p_.4 }}</span></a> liked a Recipe</h5>
+                    <a class="link-nodec" href="/recipes/{{ p_.5 }}">
+                    <div class="post-secondary" style="background-image: url({{ p_.6 }});">
+                        <h6>{{ p_.7 }}</h6>
+                    </div></a>
+                </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block style %}
+.textarea{
+    height: 80px;
+}
+{% endblock %}
+{% block body %}
+{% load crispy_forms_tags %}
+{% load static %}
+<div class="container bg-white">
+    <div class="row">
+        <div class="col-md-3 col-mid">
+            <img class="recipe-img" src="{{recipe.recipe_pic.url}}">
+        </div>
+        <div class="col-md-6 col-mid">
+            <h3>{{recipe.title}}</h3>
+            <a class="link-nodec" href="/profile/{{ recipe.user_pk }}"><h4>by {{ name }}</h4></a>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2 col-mid">
+            <p>{{ like_count }}<br>Liked this Recipe</p>
+            {% if not liked %}
+                <form action="#" method="get">
+                    {% csrf_token %}
+                    <input type="submit" class="btn-outline-vermillion" value="Like" name="like">
+                </form>
+            {% else %}
+                <form action="#" method="get">
+                    {% csrf_token %}
+                    <input type="submit" class="btn-vermillion" value="UnLike" name="unlike">
+                </form>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="row profile-recipes-div"></div>
+    <center><h2>Ingredients</h2></center>
+    <div class="row profile-recipes-div"></div>
+    <p class="col-mid">{% for line in ingredients %}
+        {{ line }}<br>
+    {% endfor %}</p>
+    <br>
+    <div class="row profile-recipes-div"></div>
+    <center><h2>Instructions</h2></center>
+    <div class="row profile-recipes-div"></div>
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <p class="col-mid">
+            {% for line in instructions %}
+                {{ line }}<br>
+            {% endfor %}
+        </p>
+    </div>
+    <div class="col-md-2"></div></div>
+</div>
+{% for p_ in comments %}
+    <div class="container bg-white">
+        <div class="row">
+            <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-1">
+                <img class="post-img" src="{{ p_.1 }}"></div>
+                <div class="col-md-11">
+                <h5><a class="link-nodec" href="/profile/{{ p_.4 }}"><span class="color-vermillion">{{ p_.0 }}</span></a></h5>
+                <br><h5>{{ p_.2 }}</h5></div>
+            </div></div>
+            <div class="col-md-3">
+            <h5 class="datetime">{{ p_.3 }}</h5>
+        </div></div>
+    </div>
+{% endfor %}
+<div class="container bg-white">
+    <div class="row">
+        <div class="col-md-1">
+            <img src="{{ user.profile_pic.url }}" class="post-img">
+        </div>
+        <div class="col-md-11">
+            <form enctype="multipart/form-data" method="post" action=".">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class = "btn-outline-vermillion" type="submit" value="Add a Comment!">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

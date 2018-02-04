@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <h2>Recipes <span class="found">({{ recipes_count }} found)</span></h2>
+    {% for c in recipes %}
+        <a class="link-nodec" href="/recipes/{{ c.pk }}">
+        <div class="post-secondary" style="background-image: url({{c.recipe_pic.url}});">
+            <h6>{{c.title}}</h6>
+        </div></a>
+    {% endfor %}
+</div>
+<br>
+<div class="container">
+    <h2>Accounts <span class="found">({{ accounts_count }} found)</span></h2>
+    {% for a in accounts %}
+        <a href="/profile/{{a.pk}}" class="link-nodec foll">
+        <div class="row">
+            <div class="col-lg-1 col-mid"><img src="{{a.profile_pic.url}}" class="follow-img"></div>
+            <div class="col-lg-2 col-mid col-fol">{{ a.first_name }} {{ a.last_name }}<br><span class="color-vermillion">{{ a.title }}</span></div>
+        </div>
+    </a>
+    <hr>
+    {% endfor %}
+</div>
+{% endblock %}

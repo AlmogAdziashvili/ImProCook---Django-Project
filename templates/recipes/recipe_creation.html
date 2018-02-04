@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 col">
+            <form enctype="multipart/form-data" method="post" action=".">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class = "btn-outline-vermillion" type="submit" value="Share This Recipe!">
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <h2>Top Five Recipes...</h2>
+{% for recipe_ in recipe_list_ %}
+    <a href="/recipes/{{ recipe_.pk }}">
+        <div class="post-secondary" style="background-image: url({{recipe_.recipe_pic.url}});">
+            <h6>{{recipe_.title}}</h6>
+        </div></a>
+{% endfor %}
+</div>
+{% endblock %}
